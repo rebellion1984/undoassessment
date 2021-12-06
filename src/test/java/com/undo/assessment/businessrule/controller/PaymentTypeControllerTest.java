@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.undo.assessment.businessrule.service.PaymentTypeService;
+import com.undo.assessment.businessrule.service.PaymentTypeServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = PaymentTypeController.class)
@@ -24,12 +24,37 @@ class PaymentTypeControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PaymentTypeService service;
+    private PaymentTypeServiceImpl service;
 	
 	@Test
-	void valid_api_call_returns_200_ok() throws Exception {
+	void valid_product_api_call_returns_200_ok() throws Exception {
 		String inputValue = "book";
-		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/" + inputValue)
+		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/product/" + inputValue)
+				.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
+	void empty_param_product_api_call_returns_404_error() throws Exception {
+		String inputValue = "";
+		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/product/" + inputValue)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+	
+	@Disabled
+	@Test
+	void invalid_value_product_api_call_returns_404_error() throws Exception {
+		String inputValue = "x";
+		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/product/" + inputValue)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+	
+	@Test
+	void valid_membership_api_call_returns_200_ok() throws Exception {
+		String inputValue = "membership";
+		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/membership/" + inputValue)
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk());
 	}
@@ -37,16 +62,7 @@ class PaymentTypeControllerTest {
 	@Test
 	void empty_param_api_call_returns_404_error() throws Exception {
 		String inputValue = "";
-		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/" + inputValue)
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound());
-	}
-	
-	@Disabled
-	@Test
-	void invalid_value_api_call_returns_404_error() throws Exception {
-		String inputValue = "x";
-		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/" + inputValue)
+		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/membership/" + inputValue)
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}

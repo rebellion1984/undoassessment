@@ -1,4 +1,4 @@
-package com.undo.assessment.businessrule.model;
+package com.undo.assessment.businessrule.domain;
 
 import java.util.List;
 

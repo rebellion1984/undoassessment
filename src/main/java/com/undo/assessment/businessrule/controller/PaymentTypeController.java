@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.undo.assessment.businessrule.model.PackingSlip;
-import com.undo.assessment.businessrule.service.PaymentTypeService;
+import com.undo.assessment.businessrule.domain.Membership;
+import com.undo.assessment.businessrule.domain.PackingSlip;
+import com.undo.assessment.businessrule.service.PaymentTypeServiceImpl;
 
 @RestController
 @RequestMapping(value = "/businessrule")
@@ -15,10 +16,15 @@ import com.undo.assessment.businessrule.service.PaymentTypeService;
 public class PaymentTypeController {
 
 	@Autowired
-	private PaymentTypeService service;
+	private PaymentTypeServiceImpl service;
 
-	@GetMapping(value = "/{paymentType}")
-	public String getBusinessRule(@PathVariable String paymentType) {
-			return service.resolvePaymentType(paymentType);
+	@GetMapping(value = "/product/{paymentType}")
+	public PackingSlip getProductDetails(@PathVariable String paymentType) {
+			return service.paymentForProduct(paymentType);
+	}
+	
+	@GetMapping(value = "/membership/{paymentType}")
+	public Membership getMembershipDetails(@PathVariable String paymentType) {
+			return service.paymentForMembership(paymentType);
 	}
 }
