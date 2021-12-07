@@ -18,11 +18,13 @@ class PaymentTypeServiceImplTest {
 
 	@Test
 	void valid_product_paymentType_param_returns_ok() {
-		String pType = "book";
+		String paymentFor = "book";
 		
-		PackingSlip output = service.paymentForProduct(pType);
+		PackingSlip output = service.paymentForProduct(paymentFor);
 		
 		assertNotNull(output);
+		assertEquals(1, output.getSlipId());
+		
 	}
 
 //	@Disabled
@@ -36,10 +38,11 @@ class PaymentTypeServiceImplTest {
 	
 	@Test
 	void valid_membership_paymentType_param_returns_ok() {
-		String pType = "membership";
+		String paymentFor = "membership";
 		
-		Membership output = service.paymentForMembership(pType);
+		Membership output = service.paymentForMembership(paymentFor);
 		
-		assertNotNull(output);
+		//assertNotNull(output);
+		assertEquals("ACTIVATE_MEMBERSHIP", output.toString());
 	}
 }

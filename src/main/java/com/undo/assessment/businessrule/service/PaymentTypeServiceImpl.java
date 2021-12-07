@@ -24,14 +24,14 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
 	private String upgrade = "UPGRADE";
 
 	@Override
-	public PackingSlip paymentForProduct(String paymentType) {
-		return determinePaymentType(paymentType);
+	public PackingSlip paymentForProduct(String paymentReceived) {
+		return determinePaymentType(paymentReceived);
 	}
 
 	@Override
-	public Membership paymentForMembership(String paymentType) {
+	public Membership paymentForMembership(String paymentReceived) {
 
-		if (paymentType.equalsIgnoreCase(membership)) {
+		if (paymentReceived.equalsIgnoreCase(membership)) {
 			processMembership = Membership.ACTIVATE_MEMBERSHIP;
 			
 			//email to owner	
@@ -41,7 +41,7 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
 			emailToOwner.setBody("Dear customer, this is to inform you that your membership has been activated");
 		}
 
-		if (paymentType.equalsIgnoreCase(upgrade)) {
+		if (paymentReceived.equalsIgnoreCase(upgrade)) {
 			processMembership = Membership.UPGRADE_MEMBERSHIP;
 			//email functionality to be implemented, like in the above
 		}
@@ -50,10 +50,10 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
 
 	}
 
-	private PackingSlip determinePaymentType(String paymentType) {
+	private PackingSlip determinePaymentType(String paymentReceived) {
 
-			if (paymentType.equalsIgnoreCase(physicalProduct) || paymentType.equalsIgnoreCase(book)) {
-				processPackingSlip = generatePackingSlip(paymentType);
+			if (paymentReceived.equalsIgnoreCase(physicalProduct) || paymentReceived.equalsIgnoreCase(book)) {
+				processPackingSlip = generatePackingSlip(paymentReceived);
 				
 				// generate commission to agent
 				CommissionPercentage commission = new CommissionPercentage();
@@ -62,14 +62,14 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
 				agent.setCommissionAmount(com); 
 			}
 
-			if (paymentType.equalsIgnoreCase(learningToSkiVideo)) {
+			if (paymentReceived.equalsIgnoreCase(learningToSkiVideo)) {
 				processPackingSlip = generatePackingSlip(learningToSkiVideo);
 			}
 
 		return processPackingSlip;
 	}
 
-	private PackingSlip generatePackingSlip(String paymentType) {
+	private PackingSlip generatePackingSlip(String paymentReceived) {
 
 		Product product1 = new Product(1, "Beer", "2");
 		Product product2 = new Product(2, "Wine", "5");
@@ -84,12 +84,12 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
 		packingSlip1.setProductList(products);
 
 		// returns duplicate packing slip
-		if (paymentType.equalsIgnoreCase(book)) {
+		if (paymentReceived.equalsIgnoreCase(book)) {
 			return packingSlip1;
 		}
 
 		//add product to the packing slip
-		if (paymentType.equalsIgnoreCase(learningToSkiVideo)) {
+		if (paymentReceived.equalsIgnoreCase(learningToSkiVideo)) {
 		    product3 = new Product(3, "Free First Aid Video", "1");
 			products.add(product3);
 		}

@@ -5,6 +5,6 @@ import com.undo.assessment.businessrule.domain.PackingSlip;
 
 public interface PaymentTypeService {
 	
-	PackingSlip paymentForProduct (String paymentType);
-	Membership paymentForMembership (String paymentType);
+	PackingSlip paymentForProduct (String paymentReceived);
+	Membership paymentForMembership (String paymentReceived);
 }

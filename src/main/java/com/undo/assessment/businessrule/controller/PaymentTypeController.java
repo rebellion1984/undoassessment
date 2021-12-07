@@ -18,13 +18,13 @@ public class PaymentTypeController {
 	@Autowired
 	private PaymentTypeServiceImpl service;
 
-	@GetMapping(value = "/product/{paymentType}")
-	public PackingSlip getProductDetails(@PathVariable String paymentType) {
-			return service.paymentForProduct(paymentType);
+	@GetMapping(value = "/product/{paymentReceived}")
+	public PackingSlip getProductDetails(@PathVariable String paymentReceived) {
+			return service.paymentForProduct(paymentReceived);
 	}
 	
-	@GetMapping(value = "/membership/{paymentType}")
-	public Membership getMembershipDetails(@PathVariable String paymentType) {
-			return service.paymentForMembership(paymentType);
+	@GetMapping(value = "/membership/{paymentReceived}")
+	public Membership getMembershipDetails(@PathVariable String paymentReceived) {
+			return service.paymentForMembership(paymentReceived);
 	}
 }
