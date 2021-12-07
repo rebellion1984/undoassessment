@@ -42,14 +42,14 @@ class PaymentTypeControllerTest {
 				.andExpect(status().isNotFound());
 	}
 	
-	@Disabled
-	@Test
-	void invalid_value_product_api_call_returns_404_error() throws Exception {
-		String inputValue = "x";
-		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/product/" + inputValue)
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound());
-	}
+//	@Disabled
+//	@Test
+//	void invalid_value_product_api_call_returns_404_error() throws Exception {
+//		String inputValue = "x";
+//		mockMvc.perform(MockMvcRequestBuilders.get("/businessrule/product/" + inputValue)
+//				.contentType(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isNotFound());
+//	}
 	
 	@Test
 	void valid_membership_api_call_returns_200_ok() throws Exception {

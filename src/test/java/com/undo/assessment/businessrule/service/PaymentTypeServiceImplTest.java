@@ -25,14 +25,14 @@ class PaymentTypeServiceImplTest {
 		assertNotNull(output);
 	}
 
-	@Disabled
-	@Test
-	void empty_paymentType_param_returns_error() {
-		String pType = "";
-		
-		PackingSlip apiCallResult = service.paymentForProduct(pType);
-		assertNull(apiCallResult);
-	}
+//	@Disabled
+//	@Test
+//	void empty_paymentType_param_returns_error() {
+//		String pType = "";
+//		
+//		PackingSlip apiCallResult = service.paymentForProduct(pType);
+//		assertNull(apiCallResult);
+//	}
 	
 	@Test
 	void valid_membership_paymentType_param_returns_ok() {
